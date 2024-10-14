@@ -1,26 +1,26 @@
 
-Pinger and Ponger are 2 Go based microservices communicate securely via TLS. The pinger sends
-regular signals to the ponger, which acknowledges the signals by sending a pong.
+Pinger and Ponger are 2 Go based microservices which communicate securely via TLS. The pinger sends
+regular signals to the ponger, which acknowledges the signals by sending a pong. This project
+enhanse the deployment of these 2 app on the development stage.
 
 
-Key Features
-TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
+# Key Features
+- TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
 certificates.
-Containerized with Docker: Ensures easy deployment and scalability of both services.
-Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
+- Containerized with Docker: Ensures easy deployment and scalability of both services.
+- Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
 development environments.
-Port-forwarding: For quick local access and testing of services.
+- Port-forwarding: For quick local access and testing of services.
 
 
-Project Setup and installation
+# Project Setup and installation
 The tools already installed for the project locally are as follow:
-Docker: To containerize the apps.
-Docker Desktop: To host k3d cluster
-k3d: For managing the lightweight Kubernetes cluster.
-TLS Certificates: Used to secure communication between services.
+- Docker: To containerize the apps.
+- Docker Desktop: To host k3d cluster
+- k3d: For managing the lightweight Kubernetes cluster.
 
 
-Running the applications
+# Running the applications
 
 A two node agent k3d cluster was created with the following command:
 
@@ -33,12 +33,13 @@ From the source code, the Dockerfile and Docker image of both pinger and ponger 
 Multi-stage building was used in order to optimize the images, improve security and reduce the image
 size. The first build stage compiles the Go binary and the final stage uses a lightweight Alpine
 image to run the app. The command to build the image for:
-    Pinger
+
+    - Pinger
 ``` 
 docker build -t pinger:latest app -f app/pinger/Dockerfile 
 ```
 
-    Ponger
+    - Ponger
 ``` 
 docker build -t ponger:latest app -f app/ponger/Dockerfile 
 ```
@@ -46,7 +47,8 @@ docker build -t ponger:latest app -f app/ponger/Dockerfile
 Openssl was used to create self-signed certificate with SAN (Subject Alternative Name) to ensure the
 validity of the TLS certificate. The certificates are located in the certs directory. The steps used
 to create the certificates are as follow:
-    Create the SAN configuration
+
+    - Create the SAN configuration
 ``` 
 [req]
 distinguished_name = req_distinguished_name
@@ -75,7 +77,7 @@ DNS.1 = ponger
 DNS.2 = ponger.default.svc.cluster.local 
 ```
 
-    Generate the certificate
+    - Generate the certificate
 ``` 
 openssl req -x509 -nodes -newkey rsa:2048 \
   -keyout server.key \
@@ -89,39 +91,46 @@ The manifests file was used to deploy the applications in k3d. This include depl
 pods for pinger and ponger, services, which expose the pod internally within the cluster, and
 Network Policies, which ensure communication between services.
 The image of pinger and ponger was first imported to k3d cluster with the command:
-``` k3d image import pinger:latest --cluster cluster ```
-``` k3d image import ponger:latest --cluster cluster ```
+
+``` k3d image import pinger:latest --cluster cluster
+    k3d image import ponger:latest --cluster cluster 
+```
+
 The manifest files was deployed using the command:
-``` kubectl create -f app/ponger/manifests ```
-``` kubectl create -f app/pinger/manifests ```
+
+``` kubectl create -f app/ponger/manifests 
+    kubectl create -f app/pinger/manifests 
+```
 
 
 Pinger and Ponger is up and running and could be checked through the command:
-``` kubectl get pod ```
-``` kubectl get svc ```
-``` kubectl log <name of the pod> ```
+``` kubectl get pod 
+    kubectl get svc 
+    kubectl log <name of the pod> 
+```
 
 This can be verified with the sample of the logs, displayed bellow:
-   Pinger:
+  - Pinger:
 2024/10/14 17:21:19 Got pong
 2024/10/14 17:21:20 Sent ping
-   Ponger:
+  - Ponger:
 2024/10/14 17:21:19 Received GET /ping
 2024/10/14 17:21:20 Received GET /ping
 
 Port forward to test the application locally is as follow:
-``` kubectl port-forward svc/ponger 8080:8080 ```
+``` 
+kubectl port-forward svc/ponger 8080:8080 
+```
 
 The application can then be accessed with
-``` https://localhost:8080/ping ```
+https://localhost:8080/ping
 
 
 For best practice, the certificate and the key were not pushed into Github as this can lead to
 serious security vulnerabilities.
 
 
-
-Recommendation on running the application in production environment
+# Recommendation on running the application in production environment
 While this project showcases a basic microservice architecture, transitioning to a production
 environment requires additional measures for scalability, security, and reliability. Here are some
 key enhancements:
