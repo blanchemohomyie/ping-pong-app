@@ -15,9 +15,9 @@ development environments.
 
 # Project Setup and installation
 The tools already installed for the project locally are as follow:
-- Docker: To containerize the apps.
-- Docker Desktop: To host k3d cluster
-- k3d: For managing the lightweight Kubernetes cluster.
+- **Docker**: To containerize the apps.
+- **Docker Desktop**: To host k3d cluster
+- **k3d**: For managing the lightweight Kubernetes cluster.
 
 
 # Running the applications
@@ -30,17 +30,17 @@ k3d cluster create cluster --k3s-arg '--disable=servicelb@server:0' --k3s-arg
 ```
 
 From the source code, the Dockerfile and Docker image of both pinger and ponger were created.
-Multi-stage building was used in order to optimize the images, improve security and reduce the image
-size. The first build stage compiles the Go binary and the final stage uses a lightweight Alpine
-image to run the app. The command to build the image for:
+**Multi-stage building** was used in order to optimize the images, improve security and reduce the
+image size. The first build stage compiles the Go binary and the final stage uses a lightweight
+Alpine image to run the app. The command to build the image for:
 
-Pinger
+**Pinger**
 
 ``` 
 docker build -t pinger:latest app -f app/pinger/Dockerfile 
 ```
 
-Ponger
+**Ponger**
 
 ``` 
 docker build -t ponger:latest app -f app/ponger/Dockerfile 
@@ -50,7 +50,7 @@ Openssl was used to create self-signed certificate with SAN (Subject Alternative
 validity of the TLS certificate. The certificates are located in the certs directory. The steps used
 to create the certificates are as follow:
 
-Create the SAN configuration
+**Create the SAN configuration**
 
 ``` 
 [req]
@@ -80,7 +80,7 @@ DNS.1 = ponger
 DNS.2 = ponger.default.svc.cluster.local 
 ```
 
-Generate the certificate
+**Generate the certificate**
 
 ``` 
 openssl req -x509 -nodes -newkey rsa:2048 \
@@ -142,16 +142,16 @@ serious security vulnerabilities.
 While this project showcases a basic microservice architecture, transitioning to a production
 environment requires additional measures for scalability, security, and reliability. Here are some
 key enhancements:
-- Secure Communications: Replace self-signed certificates with those issued by a trusted
+- **Secure Communications**: Replace self-signed certificates with those issued by a trusted
 Certificate Authority (CA). Tools like Let's Encrypt or AWS Certificate Manager can automate this
 process.
-- Efficient Traffic Management: Utilize an ingress controller like NGINX or Traefik to handle TLS
+- **Efficient Traffic Management**: Utilize an ingress controller like NGINX or Traefik to handle TLS
 termination and load balancing, improving performance and security.
-- Robust Monitoring: Implement monitoring tools like Prometheus and Grafana to track service health
-and performance, identify issues promptly, and respond to security threats efficiently.
-- Secure Image Distribution: Store Docker images in a private container registry to control access,
-maintain consistency, and integrate with your CI/CD pipeline.
-- Simplified Kubernetes Management: Use Helm charts to package and deploy Kubernetes resources
+- **Robust Monitoring**: Implement monitoring tools like Prometheus and Grafana to track service
+health and performance, identify issues promptly, and respond to security threats efficiently.
+- **Secure Image Distribution**: Store Docker images in a private container registry to control
+access, maintain consistency, and integrate with your CI/CD pipeline.
+- **Simplified Kubernetes Management**: Use Helm charts to package and deploy Kubernetes resources
 efficiently, streamlining deployments and minimizing downtime.
-- Protect Sensitive Data: Store sensitive information in a secrets manager like AWS Secrets Manager
-or HashiCorp Vault to prevent exposure and enable automated rotation.
+- **Protect Sensitive Data**: Store sensitive information in a secrets manager like AWS Secrets
+Manager or HashiCorp Vault to prevent exposure and enable automated rotation.
