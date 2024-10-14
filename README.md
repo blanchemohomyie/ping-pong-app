@@ -5,7 +5,7 @@ enhanse the deployment of these 2 app on the development stage.
 
 
 # Key Features
-- *TLS Encryption*: Ensures secure communication between Pinger and Ponger using self-signed
+- TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
 certificates.
 - Containerized with Docker: Ensures easy deployment and scalability of both services.
 - Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
@@ -15,9 +15,9 @@ development environments.
 
 # Project Setup and installation
 The tools already installed for the project locally are as follow:
-- *Docker*: To containerize the apps.
-- *Docker Desktop*: To host k3d cluster
-- *k3d*: For managing the lightweight Kubernetes cluster.
+- Docker: To containerize the apps.
+- Docker Desktop: To host k3d cluster
+- k3d: For managing the lightweight Kubernetes cluster.
 
 
 # Running the applications
@@ -115,13 +115,13 @@ Pinger and Ponger is up and running and could be checked through the command:
 
 This can be verified with the sample of the logs, displayed bellow:
 - Pinger:
-2024/10/14 17:21:19 Got pong
 
+2024/10/14 17:21:19 Got pong
 2024/10/14 17:21:20 Sent ping
 
 - Ponger:
-2024/10/14 17:21:19 Received GET /ping
 
+2024/10/14 17:21:19 Received GET /ping
 2024/10/14 17:21:20 Received GET /ping
 
 
