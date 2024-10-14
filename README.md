@@ -115,12 +115,12 @@ Pinger and Ponger is up and running and could be checked through the command:
 
 This can be verified with the sample of the logs, displayed bellow:
 
-- Pinger:
+Pinger:
 ``` 2024/10/14 17:21:19 Got pong
     2024/10/14 17:21:20 Sent ping
 ```
 
-- Ponger:
+Ponger:
 ``` 2024/10/14 17:21:19 Received GET /ping
     2024/10/14 17:21:20 Received GET /ping
 ```
