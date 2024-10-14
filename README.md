@@ -5,7 +5,7 @@ enhanse the deployment of these 2 app on the development stage.
 
 
 # Key Features
-- TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
+- *TLS Encryption*: Ensures secure communication between Pinger and Ponger using self-signed
 certificates.
 - Containerized with Docker: Ensures easy deployment and scalability of both services.
 - Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
@@ -15,9 +15,9 @@ development environments.
 
 # Project Setup and installation
 The tools already installed for the project locally are as follow:
-- Docker: To containerize the apps.
-- Docker Desktop: To host k3d cluster
-- k3d: For managing the lightweight Kubernetes cluster.
+- *Docker*: To containerize the apps.
+- *Docker Desktop*: To host k3d cluster
+- *k3d*: For managing the lightweight Kubernetes cluster.
 
 
 # Running the applications
@@ -34,12 +34,14 @@ Multi-stage building was used in order to optimize the images, improve security 
 size. The first build stage compiles the Go binary and the final stage uses a lightweight Alpine
 image to run the app. The command to build the image for:
 
-    - Pinger
+Pinger
+
 ``` 
 docker build -t pinger:latest app -f app/pinger/Dockerfile 
 ```
 
-    - Ponger
+Ponger
+
 ``` 
 docker build -t ponger:latest app -f app/ponger/Dockerfile 
 ```
@@ -48,7 +50,8 @@ Openssl was used to create self-signed certificate with SAN (Subject Alternative
 validity of the TLS certificate. The certificates are located in the certs directory. The steps used
 to create the certificates are as follow:
 
-    - Create the SAN configuration
+Create the SAN configuration
+
 ``` 
 [req]
 distinguished_name = req_distinguished_name
@@ -77,7 +80,8 @@ DNS.1 = ponger
 DNS.2 = ponger.default.svc.cluster.local 
 ```
 
-    - Generate the certificate
+Generate the certificate
+
 ``` 
 openssl req -x509 -nodes -newkey rsa:2048 \
   -keyout server.key \
@@ -110,12 +114,16 @@ Pinger and Ponger is up and running and could be checked through the command:
 ```
 
 This can be verified with the sample of the logs, displayed bellow:
-  - Pinger:
+- Pinger:
 2024/10/14 17:21:19 Got pong
+
 2024/10/14 17:21:20 Sent ping
-  - Ponger:
+
+- Ponger:
 2024/10/14 17:21:19 Received GET /ping
+
 2024/10/14 17:21:20 Received GET /ping
+
 
 Port forward to test the application locally is as follow:
 ``` 
