@@ -5,12 +5,12 @@ enhanse the deployment of these 2 app on the development stage.
 
 
 # Key Features
-- TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
+- **TLS Encryption**: Ensures secure communication between Pinger and Ponger using self-signed
 certificates.
-- Containerized with Docker: Ensures easy deployment and scalability of both services.
-- Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
+- **Containerized with Docker**: Ensures easy deployment and scalability of both services.
+- **Kubernetes-Orchestrated**: Both services run on a lightweight k3d cluster, making it perfect for
 development environments.
-- Port-forwarding: For quick local access and testing of services.
+- **Port-forwarding**: For quick local access and testing of services.
 
 
 # Project Setup and installation
