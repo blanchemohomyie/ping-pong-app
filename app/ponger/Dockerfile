@@ -10,7 +10,7 @@ COPY ponger .
 # Install dependencies
 RUN go mod download
 
-# Build the application (change directory if needed)
+# Build the application 
 RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -a --installsuffix cgo --ldflags="-s -w" -o ponger .
 
 # Define the final image
@@ -24,11 +24,8 @@ COPY --from=builder /app/ponger .
 COPY --from=builder /app/config.yaml .
 COPY certs /app/certs
 
-# Expose the port (adjust if needed)
+# Expose the port
 EXPOSE 8080
 
 # Command to run the application
 CMD ["./ponger"]
-
-# Optional: Copy configuration file (adjust path if needed)
-# COPY config.yaml /app/config.yaml

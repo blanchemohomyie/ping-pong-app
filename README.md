@@ -23,23 +23,32 @@ TLS Certificates: Used to secure communication between services.
 Running the applications
 
 A two node agent k3d cluster was created with the following command:
-``` k3d cluster create cluster --k3s-arg '--disable=servicelb@server:0' --k3s-arg
-'--disable=traefik@server:0' --agents 2 ```
+
+``` 
+k3d cluster create cluster --k3s-arg '--disable=servicelb@server:0' --k3s-arg
+'--disable=traefik@server:0' --agents 2 
+```
 
 From the source code, the Dockerfile and Docker image of both pinger and ponger were created.
 Multi-stage building was used in order to optimize the images, improve security and reduce the image
 size. The first build stage compiles the Go binary and the final stage uses a lightweight Alpine
 image to run the app. The command to build the image for:
     Pinger
-``` docker build -t pinger:latest app -f app/pinger/Dockerfile ```
+``` 
+docker build -t pinger:latest app -f app/pinger/Dockerfile 
+```
+
     Ponger
-``` docker build -t ponger:latest app -f app/ponger/Dockerfile ```
+``` 
+docker build -t ponger:latest app -f app/ponger/Dockerfile 
+```
 
 Openssl was used to create self-signed certificate with SAN (Subject Alternative Name) to ensure the
 validity of the TLS certificate. The certificates are located in the certs directory. The steps used
 to create the certificates are as follow:
     Create the SAN configuration
-``` [req]
+``` 
+[req]
 distinguished_name = req_distinguished_name
 req_extensions = req_ext
 x509_extensions = v3_req
@@ -63,14 +72,17 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = ponger
-DNS.2 = ponger.default.svc.cluster.local ```
+DNS.2 = ponger.default.svc.cluster.local 
+```
 
     Generate the certificate
-``` openssl req -x509 -nodes -newkey rsa:2048 \
+``` 
+openssl req -x509 -nodes -newkey rsa:2048 \
   -keyout server.key \
   -out server.crt \
   -days 365 \
-  -config san.cnf ```
+  -config san.cnf 
+```
 
 
 The manifests file was used to deploy the applications in k3d. This include deployment, which create
