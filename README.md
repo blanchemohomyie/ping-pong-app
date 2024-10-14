@@ -5,7 +5,7 @@ enhanse the deployment of these 2 app on the development stage.
 
 
 # Key Features
-- #TLS Encryption#: Ensures secure communication between Pinger and Ponger using self-signed
+- TLS Encryption: Ensures secure communication between Pinger and Ponger using self-signed
 certificates.
 - Containerized with Docker: Ensures easy deployment and scalability of both services.
 - Kubernetes-Orchestrated: Both services run on a lightweight k3d cluster, making it perfect for
@@ -114,18 +114,16 @@ Pinger and Ponger is up and running and could be checked through the command:
 ```
 
 This can be verified with the sample of the logs, displayed bellow:
+
 - Pinger:
-
-2024/10/14 17:21:19 Got pong
-
-2024/10/14 17:21:20 Sent ping
+``` 2024/10/14 17:21:19 Got pong
+    2024/10/14 17:21:20 Sent ping
+```
 
 - Ponger:
-
-2024/10/14 17:21:19 Received GET /ping
-
-2024/10/14 17:21:20 Received GET /ping
-
+``` 2024/10/14 17:21:19 Received GET /ping
+    2024/10/14 17:21:20 Received GET /ping
+```
 
 Port forward to test the application locally is as follow:
 ``` 
@@ -144,9 +142,16 @@ serious security vulnerabilities.
 While this project showcases a basic microservice architecture, transitioning to a production
 environment requires additional measures for scalability, security, and reliability. Here are some
 key enhancements:
-- Secure Communications: Replace self-signed certificates with those issued by a trusted Certificate Authority (CA). Tools like Let's Encrypt or AWS Certificate Manager can automate this process.
-- Efficient Traffic Management: Utilize an ingress controller like NGINX or Traefik to handle TLS termination and load balancing, improving performance and security.
-- Robust Monitoring: Implement monitoring tools like Prometheus and Grafana to track service health and performance, identify issues promptly, and respond to security threats efficiently.
-- Secure Image Distribution: Store Docker images in a private container registry to control access, maintain consistency, and integrate with your CI/CD pipeline.
-- Simplified Kubernetes Management: Use Helm charts to package and deploy Kubernetes resources efficiently, streamlining deployments and minimizing downtime.
-- Protect Sensitive Data: Store sensitive information in a secrets manager like AWS Secrets Manager or HashiCorp Vault to prevent exposure and enable automated rotation.
+- Secure Communications: Replace self-signed certificates with those issued by a trusted
+Certificate Authority (CA). Tools like Let's Encrypt or AWS Certificate Manager can automate this
+process.
+- Efficient Traffic Management: Utilize an ingress controller like NGINX or Traefik to handle TLS
+termination and load balancing, improving performance and security.
+- Robust Monitoring: Implement monitoring tools like Prometheus and Grafana to track service health
+and performance, identify issues promptly, and respond to security threats efficiently.
+- Secure Image Distribution: Store Docker images in a private container registry to control access,
+maintain consistency, and integrate with your CI/CD pipeline.
+- Simplified Kubernetes Management: Use Helm charts to package and deploy Kubernetes resources
+efficiently, streamlining deployments and minimizing downtime.
+- Protect Sensitive Data: Store sensitive information in a secrets manager like AWS Secrets Manager
+or HashiCorp Vault to prevent exposure and enable automated rotation.
