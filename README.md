@@ -117,15 +117,11 @@ This can be verified with the sample of the logs, displayed bellow:
 
 Pinger:
 ``` 2024/10/14 17:21:19 Got pong
-```
-```
     2024/10/14 17:21:20 Sent ping
 ```
 
 Ponger:
 ``` 2024/10/14 17:21:19 Received GET /ping
-```
-```
     2024/10/14 17:21:20 Received GET /ping
 ```
 
