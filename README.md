@@ -1,7 +1,7 @@
 
 Pinger and Ponger are 2 Go based microservices which communicate securely via TLS. The pinger sends
 regular signals to the ponger, which acknowledges the signals by sending a pong. This project
-enhanse the deployment of these 2 app on the development stage.
+enhance the deployment of these 2 apps on the development stage.
 
 
 # Key Features
@@ -117,11 +117,15 @@ This can be verified with the sample of the logs, displayed bellow:
 
 Pinger:
 ``` 2024/10/14 17:21:19 Got pong
+```
+```
     2024/10/14 17:21:20 Sent ping
 ```
 
 Ponger:
 ``` 2024/10/14 17:21:19 Received GET /ping
+```
+```
     2024/10/14 17:21:20 Received GET /ping
 ```
 
